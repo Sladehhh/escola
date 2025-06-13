@@ -1,0 +1,95 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    background: #0077b6;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Modo escuro */
+body.modo-escuro {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.modo-escuro header {
+    background: #0d1b2a;
+}
+
+/* Carrossel */
+.carrossel {
+    width: 80%;
+    margin: 2rem auto;
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+}
+
+/* Rodapé */
+footer {
+    background: #0077b6;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+3. carrousel.js (Carrossel de Imagens)
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carrossel = document.querySelector('.carrossel');
+    const imagens = [
+        'imagens/escola1.jpg',
+        'imagens/escola2.jpg',
+        'imagens/escola3.jpg'
+    ];
+    
+    let currentIndex = 0;
+    
+    function mostrarImagem(index) {
+        carrossel.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = imagens[index];
+        img.alt = 'Imagem da escola';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        carrossel.appendChild(img);
+    }
+    
+    function proximaImagem() {
+        currentIndex = (currentIndex + 1) % imagens.length;
+        mostrarImagem(currentIndex);
+    }
+    
+    // Mostrar a primeira imagem
+    mostrarImagem(currentIndex);
+    
+    // Trocar de imagem a cada 5 segundos
+    setInterval(proximaImagem, 5000);
+});
