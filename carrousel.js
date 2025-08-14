@@ -1,32 +1,28 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const carrossel = document.querySelector('.carrossel');
-    const imagens = [
-        'imagens/escola1.jpg',
-        'imagens/escola2.jpg',
-        'imagens/escola3.jpg'
-    ];
-    
-    let currentIndex = 0;
-    
-    function mostrarImagem(index) {
-        carrossel.innerHTML = '';
-        const img = document.createElement('img');
-        img.src = imagens[index];
-        img.alt = 'Imagem da escola';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'cover';
-        carrossel.appendChild(img);
-    }
-    
-    function proximaImagem() {
-        currentIndex = (currentIndex + 1) % imagens.length;
-        mostrarImagem(currentIndex);
-    }
-    
-    // Mostrar a primeira imagem
-    mostrarImagem(currentIndex);
-    
-    // Trocar de imagem a cada 5 segundos
-    setInterval(proximaImagem, 5000);
-});
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
